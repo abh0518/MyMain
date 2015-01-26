@@ -8,9 +8,14 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.HttpClientBuilder;
 
 public class HtmlCore implements IHtmlGetter, IHtmlModifier{
+	
+	IHttpClientFactory httpClientFactory;
+	
+	public HtmlCore(IHttpClientFactory httpClientFactory){
+		this.httpClientFactory = httpClientFactory;
+	}
 	
 	@Override
 	public String getHtml(String url) throws ClientProtocolException, IOException{
@@ -23,12 +28,18 @@ public class HtmlCore implements IHtmlGetter, IHtmlModifier{
 		return IOUtils.toString(is, "utf-8");
 	}
 	
-	public HttpClient getHttpClient(){
-		return HttpClientBuilder.create().build();
+	HttpClient client = null;
+	
+	private HttpClient getHttpClient(){
+		if(client == null){
+			client = httpClientFactory.getClient();
+		}
+		return client;
 	}
 	
 	@Override
 	public void modifyHtml(){
-		HttpClient cliet = getHttpClient();
+		HttpClient client = getHttpClient();
+		//Html뭔가 변환작업을 해준다.
 	}
 }

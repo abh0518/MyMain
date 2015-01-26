@@ -25,7 +25,7 @@
 		<property name="id" value="nateaccount"></property>
 		<property name="passwd" value="natepassword"></property>
 	</bean>
-	
+
 	<bean id="htmlCore" class="net.abh0518.http.test.HtmlCore">
 		<constructor-arg ref="httpClientFactory" ></constructor-arg>
 	</bean>

@@ -21,11 +21,12 @@
 		</property>
 	</bean>
 
-	<bean id="httpClientFactory" class="net.abh0518.http.test.NateLoginedClientFactory">
-		<property name="id" value="nateaccount"></property>
-		<property name="passwd" value="natepassword"></property>
+	<bean id="httpClientFactory" class="net.abh0518.http.test.DaumLoginedClientFactory">
+		<property name="id" value="daumaccount"></property>
+		<property name="passwd" value="daumpassword"></property>
 	</bean>
 	
+
 	<bean id="htmlCore" class="net.abh0518.http.test.HtmlCore">
 		<constructor-arg ref="httpClientFactory" ></constructor-arg>
 	</bean>

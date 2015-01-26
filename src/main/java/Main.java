@@ -20,6 +20,7 @@ public class Main {
 	public void start(String[] args) throws ClientProtocolException, IOException{
 		context = new GenericXmlApplicationContext("applicationContext.xml");
 		
+		System.out.println("Start");
 		Properties props = context.getBean("config", Properties.class);
 		String htmlUrl = props.getProperty("html.url");
 		
