@@ -1,0 +1,50 @@
+<configuration>
+
+<!-- 
+    <property resource="logback.properties"/>
+ -->
+ 
+   	<appender name="PRODUCT_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/product.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <fileNamePattern>logs/backup/product-%d{yyyy-MM-dd}.%i.zip</fileNamePattern>
+            <maxHistory>7</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{MM-dd HH:mm:ss.SSS} [%thread] %.-1level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    <appender name="ERROR_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/error.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <fileNamePattern>logs/backup/error-%d{yyyy-MM-dd}.%i.zip</fileNamePattern>
+            <maxHistory>7</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{MM-dd HH:mm:ss.SSS} [%thread] %.-1level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="PRODUCT_APPENDER" />
+    </root>
+    
+    <!-- 일반 애플리케이션 로그, PRODUCT 방향으로 출력  -->
+    <logger name="net.abh0518.http" level="info" additivity="false">
+        <appender-ref ref="PRODUCT_APPENDER" />
+    </logger>
+    
+    <logger name="ERROR_LOGGER" level="error" additivity="false">
+        <appender-ref ref="ERROR_APPENDER" />
+    </logger>
+    
+</configuration>

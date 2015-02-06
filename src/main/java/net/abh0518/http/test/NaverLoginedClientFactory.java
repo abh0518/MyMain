@@ -2,16 +2,20 @@ package net.abh0518.http.test;
 
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class NaverLoginedClientFactory implements IHttpClientFactory{
 
+	static Logger logger = LoggerFactory.getLogger(NaverLoginedClientFactory.class);
+	
 	String id;
 	String passwd;
 	
 	@Override
 	public HttpClient getClient() {
-		System.out.println("네이버 로그인이 된 클라이언트 입니다.");
-		System.out.println(this.id + " / " + this.passwd);
+		logger.info("네이버 로그인이 된 클라이언트 입니다.");
+		logger.info(this.id + " / " + this.passwd);
 		return HttpClientBuilder.create().build();
 	}
 
